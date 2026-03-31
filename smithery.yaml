@@ -1,0 +1,22 @@
+name: tkassa-mcp
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      TKASSA_TERMINAL_KEY:
+        type: string
+        description: Terminal key from T-Kassa merchant dashboard
+      TKASSA_PASSWORD:
+        type: string
+        description: Terminal password from T-Kassa merchant dashboard
+    required: [TKASSA_TERMINAL_KEY, TKASSA_PASSWORD]
+  commandFunction: |
+    (config) => ({
+      command: "npx",
+      args: ["-y", "@theyahia/tkassa-mcp"],
+      env: {
+        TKASSA_TERMINAL_KEY: config.TKASSA_TERMINAL_KEY,
+        TKASSA_PASSWORD: config.TKASSA_PASSWORD,
+      },
+    })
