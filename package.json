@@ -1,7 +1,7 @@
 {
   "name": "@theyahia/tkassa-mcp",
-  "version": "2.0.0",
-  "description": "MCP server for T-Kassa (T-Bank/Tinkoff) payment API — 14 tools: payments, refunds, recurring, customers, cards, SBP, receipts (54-FZ).",
+  "version": "2.0.1",
+  "description": "MCP server for T-Kassa — payments, refunds, recurring, SBP, receipts (Russia)",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -58,7 +58,10 @@
     "receipt",
     "54-fz",
     "customer",
-    "cards"
+    "cards",
+    "api",
+    "typescript",
+    "payments"
   ],
   "license": "MIT",
   "repository": {
