@@ -1,6 +1,6 @@
 # @theyahia/tkassa-mcp
 
-MCP server for T-Kassa (T-Bank/Tinkoff) payment API. **14 tools:** payments, refunds, recurring charges, customer management, saved cards, SBP (Fast Payments), receipts (54-FZ).
+MCP server for T-Kassa (T-Bank/Tinkoff) payment API. **16 tools:** payments, refunds, recurring charges, customer management, saved cards, SBP (Fast Payments), receipts (54-FZ), T-Invest portfolio.
 
 [![npm](https://img.shields.io/npm/v/@theyahia/tkassa-mcp)](https://www.npmjs.com/package/@theyahia/tkassa-mcp)
 [![license](https://img.shields.io/npm/l/@theyahia/tkassa-mcp)](./LICENSE)
@@ -53,10 +53,11 @@ claude mcp add tkassa -e TKASSA_TERMINAL_KEY=your-key -e TKASSA_PASSWORD=your-pa
 |----------|:--------:|-------------|
 | `TKASSA_TERMINAL_KEY` | Yes | Terminal key (Dashboard -> Shops -> Terminals) |
 | `TKASSA_PASSWORD` | Yes | Terminal password (used for SHA-256 token signing) |
+| `TINKOFF_INVEST_TOKEN` | No | T-Invest API token (for tools 15–16). Get in T-Invest app: Settings → OpenAPI Token |
 
 Get test credentials at [T-Kassa Dashboard](https://www.tbank.ru/kassa/).
 
-## Tools (14)
+## Tools (16)
 
 ### Payments (5)
 
@@ -96,6 +97,15 @@ Get test credentials at [T-Kassa Dashboard](https://www.tbank.ru/kassa/).
 | Tool | Description |
 |------|-------------|
 | `send_closing_receipt` | Send a closing receipt with Items (Name, Price, Quantity, Tax) for fiscal compliance |
+
+### T-Invest (2)
+
+Requires `TINKOFF_INVEST_TOKEN`. If not set, these tools return a descriptive error.
+
+| Tool | Description |
+|------|-------------|
+| `get_invest_portfolio` | Get investment portfolio: stocks, bonds, ETFs, current value and P&L |
+| `find_instrument` | Search instrument by ticker, ISIN, or company name. Returns FIGI key |
 
 ## Auth
 
@@ -176,7 +186,7 @@ Refund 500 rubles from payment 777888999, then check its current status.
 | [@metarebalance/dadata-mcp](https://github.com/theYahia/dadata-mcp) | ready | Addresses, companies, banks, phones |
 | [@theyahia/cbr-mcp](https://github.com/theYahia/cbr-mcp) | ready | Exchange rates, key rate |
 | [@theyahia/yookassa-mcp](https://github.com/theYahia/yookassa-mcp) | ready | Payments, refunds, receipts 54-FZ |
-| [@theyahia/tkassa-mcp](https://github.com/theYahia/tkassa-mcp) | **v2.0** | **14 tools** -- payments, refunds, recurring, SBP, receipts |
+| [@theyahia/tkassa-mcp](https://github.com/theYahia/tkassa-mcp) | **v2.1** | **16 tools** -- payments, refunds, recurring, SBP, receipts, T-Invest |
 | ... | soon | **+46 servers** -- [full list](https://github.com/theYahia/russian-mcp) |
 
 ## License
