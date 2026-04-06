@@ -1,32 +1,33 @@
 import { z } from "zod";
 import { TKassaClient } from "../client.js";
 
-const client = new TKassaClient();
-
-// --- Schemas ---
+let _client: TKassaClient | null = null;
+function getClient(): TKassaClient {
+  if (!_client) _client = new TKassaClient();
+  return _client;
+}
 
 export const createSbpQrSchema = z.object({
-  payment_id: z.string().describe("ID платежа (из init_payment) для генерации QR-кода СБП"),
-  data_type: z.enum(["PAYLOAD", "IMAGE"]).default("PAYLOAD").describe("Тип возвращаемых данных: PAYLOAD (ссылка для QR) или IMAGE (base64 PNG)"),
+  payment_id: z.string()
+    .describe("ID платежа (из init_payment) для генерации QR-кода СБП"),
+  data_type: z.enum(["PAYLOAD", "IMAGE"]).default("PAYLOAD")
+    .describe("PAYLOAD = ссылка для оплаты, IMAGE = base64 PNG с QR-кодом"),
 });
 
 export const getSbpQrStateSchema = z.object({
-  payment_id: z.string().describe("ID платежа для проверки статуса QR-кода СБП"),
+  payment_id: z.string().describe("ID платежа для проверки статуса QR СБП"),
 });
 
-// --- Handlers ---
-
 export async function handleCreateSbpQr(params: z.infer<typeof createSbpQrSchema>): Promise<string> {
-  const body: Record<string, unknown> = {
-    PaymentId: params.payment_id,
-    DataType: params.data_type,
-  };
-
-  const result = await client.post("/SbpPayTest", body);
-  return JSON.stringify(result, null, 2);
+  return JSON.stringify(
+    await getClient().post("/SbpPay", { PaymentId: params.payment_id, DataType: params.data_type }),
+    null, 2
+  );
 }
 
 export async function handleGetSbpQrState(params: z.infer<typeof getSbpQrStateSchema>): Promise<string> {
-  const result = await client.post("/SbpPayTest", { PaymentId: params.payment_id });
-  return JSON.stringify(result, null, 2);
+  return JSON.stringify(
+    await getClient().post("/GetSbpPaymentStatus", { PaymentId: params.payment_id }),
+    null, 2
+  );
 }

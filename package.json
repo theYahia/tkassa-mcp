@@ -1,73 +1,38 @@
 {
   "name": "@theyahia/tkassa-mcp",
-  "version": "2.0.1",
-  "description": "MCP server for T-Kassa — payments, refunds, recurring, SBP, receipts (Russia)",
+  "version": "2.1.0",
+  "description": "MCP server for T-Kassa (T-Bank/Tinkoff) payment API — 16 tools: payments, refunds, customers, SBP QR, receipts, T-Invest. SHA-256 token auth.",
   "type": "module",
   "main": "dist/index.js",
-  "bin": {
-    "tkassa-mcp": "dist/index.js"
-  },
-  "files": [
-    "dist"
-  ],
-  "engines": {
-    "node": ">=18.0.0"
-  },
+  "bin": { "tkassa-mcp": "dist/index.js" },
+  "files": ["dist"],
+  "engines": { "node": ">=18.0.0" },
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/index.ts",
     "start": "node dist/index.js",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.0",
-    "zod": "^3.24.0"
+    "@theyahia/mcp-core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/node": "^22.15.3",
     "tsx": "^4.19.0",
-    "typescript": "^5.7.0",
+    "typescript": "^5.8.3",
     "vitest": "^4.1.2"
   },
-  "publishConfig": {
-    "access": "public"
-  },
+  "publishConfig": { "access": "public" },
   "mcpName": "io.github.theYahia/tkassa-mcp",
-  "keywords": [
-    "mcp",
-    "mcp-server",
-    "model-context-protocol",
-    "modelcontextprotocol",
-    "claude",
-    "ai",
-    "llm",
-    "anthropic",
-    "cursor",
-    "ai-tools",
-    "ai-agent",
-    "russian-api",
-    "tkassa",
-    "tinkoff",
-    "tbank",
-    "payment",
-    "refund",
-    "recurring",
-    "sbp",
-    "receipt",
-    "54-fz",
-    "customer",
-    "cards",
-    "api",
-    "typescript",
-    "payments"
-  ],
+  "keywords": ["mcp", "mcp-server", "model-context-protocol", "claude", "ai", "russian-api", "tkassa", "tinkoff", "tbank", "payment", "refund"],
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/theYahia/tkassa-mcp.git"
-  },
-  "homepage": "https://github.com/theYahia/tkassa-mcp#readme",
+  "repository": { "type": "git", "url": "https://github.com/theYahia/mcp-servers.git", "directory": "servers/tkassa" },
   "author": "theYahia (https://github.com/theYahia)"
 }

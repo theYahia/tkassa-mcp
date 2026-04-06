@@ -1,21 +1,25 @@
 import { z } from "zod";
 import { TKassaClient, toKopecks } from "../client.js";
 
-const client = new TKassaClient();
+let _client: TKassaClient | null = null;
+function getClient(): TKassaClient {
+  if (!_client) _client = new TKassaClient();
+  return _client;
+}
 
 // --- Schema ---
 
-export const refundPaymentSchema = z.object({
-  payment_id: z.string().describe("ID платежа для возврата в системе T-Kassa"),
-  amount: z.number().positive().optional().describe("Сумма возврата в рублях (для частичного возврата). Если не указана -- полный возврат."),
+export const cancelPaymentSchema = z.object({
+  payment_id: z.string().describe("Payment ID to refund in T-Kassa system"),
+  amount: z.number().positive().optional().describe("Refund amount in rubles (for partial refund). If omitted, full refund."),
 });
 
 // --- Handler ---
 
-export async function handleRefundPayment(params: z.infer<typeof refundPaymentSchema>): Promise<string> {
+export async function handleCancelPayment(params: z.infer<typeof cancelPaymentSchema>): Promise<string> {
   const body: Record<string, unknown> = { PaymentId: params.payment_id };
   if (params.amount) body.Amount = toKopecks(params.amount);
 
-  const result = await client.post("/Cancel", body);
+  const result = await getClient().post("/Cancel", body);
   return JSON.stringify(result, null, 2);
 }
