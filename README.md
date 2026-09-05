@@ -1,3 +1,17 @@
+> ## 🗄 Репозиторий заархивирован
+>
+> Разработка переехала в **[theYahia/WWmcp](https://github.com/theYahia/WWmcp)** — монорепозиторий MCP-серверов для незападных API: СНГ, MENA, Африка, LATAM, Юго-Восточная Азия. Общее ядро `@theyahia/mcp-core`, единый CI, единый релизный конвейер.
+>
+> Актуальная версия того, что лежало здесь: [`servers/tkassa/`](https://github.com/theYahia/WWmcp/tree/main/servers/tkassa)
+>
+> Пакет в npm прежний — [`@theyahia/tkassa-mcp`](https://www.npmjs.com/package/@theyahia/tkassa-mcp), ставится и работает как раньше.
+> Здесь больше ничего не обновляется. Задачи и pull request'ы — в WWmcp.
+>
+> **Archived — development moved to [theYahia/WWmcp](https://github.com/theYahia/WWmcp),** a monorepo of MCP servers for non-Western APIs.
+> The current version of this package now lives at [`servers/tkassa/`](https://github.com/theYahia/WWmcp/tree/main/servers/tkassa).
+> The npm package [`@theyahia/tkassa-mcp`](https://www.npmjs.com/package/@theyahia/tkassa-mcp) is unchanged.
+> Please open issues and pull requests there.
+
 # @theyahia/tkassa-mcp
 
 MCP server for T-Kassa (T-Bank/Tinkoff) payment API. **16 tools:** payments, refunds, recurring charges, customer management, saved cards, SBP (Fast Payments), receipts (54-FZ), T-Invest portfolio.
